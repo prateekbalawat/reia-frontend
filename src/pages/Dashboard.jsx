@@ -62,6 +62,8 @@ const Dashboard = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setReportSuccess("");
+    setErrorReport("");
     setResult(null);
 
     if (!investment) {

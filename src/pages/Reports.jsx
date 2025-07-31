@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import FilteredReports from "../components/FilteredReports";
+import FullScreenLoader from "../components/FullScreenLoader"; // NEW
 const API_BASE = import.meta.env.VITE_API_BASE;
 
 const Reports = () => {
@@ -42,6 +43,7 @@ const Reports = () => {
     if (!confirm) return;
 
     try {
+      setLoading(true);
       const res = await fetch(`${API_BASE}/api/reports/${reportId}`, {
         method: "DELETE",
         headers: {
@@ -56,18 +58,22 @@ const Reports = () => {
     } catch (err) {
       console.error("Error deleting report:", err.message);
       alert(err.message || "Something went wrong.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
-      <h2 className="text-2xl font-bold mb-4">My Saved Reports</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center py-5">
+        My Saved Reports
+      </h2>
       {error && <div className="text-center">Token expired. Login again.</div>}
 
       {loading ? (
-        <p>Loading reports...</p>
+        <FullScreenLoader />
       ) : reports.length === 0 ? (
-        <p>No saved reports found.</p>
+        <p class="text-center">No saved reports found.</p>
       ) : (
         <FilteredReports reports={reports} onDelete={handleDelete} />
       )}

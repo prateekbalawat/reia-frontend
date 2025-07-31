@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import FullScreenLoader from "../components/FullScreenLoader"; // NEW
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,7 @@ const Signup = () => {
   });
   const [error, setError] = useState("");
   const { signup } = useAuth();
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -29,15 +31,19 @@ const Signup = () => {
     }
 
     try {
+      setLoading(true);
       await signup(name, email, password);
       navigate("/dashboard");
     } catch (err) {
       setError(err.message || "Signup failed. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-12">
+      {loading && <FullScreenLoader />}
       <div className="bg-white rounded-xl p-8 w-full max-w-md shadow-xl">
         <h2 className="text-2xl font-bold mb-4 text-center">
           Create an Account
