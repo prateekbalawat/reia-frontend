@@ -28,6 +28,7 @@ This is the **frontend** built with **React**, **Vite**, and **Tailwind CSS**. I
 - Project 5-year ROI and CAGR
 - Show nearby properties with price data
 - Save reports and retrieve it per user
+- Download CSV or Email yourself the reports
 - Fast UI with Tailwind and Vite
 - Fully deployed on Vercel
 
