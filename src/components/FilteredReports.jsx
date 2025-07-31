@@ -86,16 +86,15 @@ const FilteredReports = ({ reports, onDelete }) => {
               </option>
             ))}
           </select>
+          <select
+            className="border px-3 py-2 rounded-md"
+            value={sort}
+            onChange={(e) => setSort(e.target.value)}
+          >
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+          </select>
         </div>
-
-        <select
-          className="border px-3 py-2 rounded-md"
-          value={sort}
-          onChange={(e) => setSort(e.target.value)}
-        >
-          <option value="newest">Newest First</option>
-          <option value="oldest">Oldest First</option>
-        </select>
       </div>
 
       <ul className="space-y-6">
@@ -104,7 +103,7 @@ const FilteredReports = ({ reports, onDelete }) => {
             key={report._id}
             className="border p-4 rounded-md bg-white shadow-sm relative"
           >
-            <div className="flex justify-between items-start">
+            <div className="flex flex-col md:flex-row justify-between items-start">
               <div>
                 <h3 className="text-lg font-semibold">{report.location}</h3>
                 <p className="text-sm text-gray-600 mb-2">
