@@ -1,7 +1,9 @@
 import reiaImg from "../assets/reia.png";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Hero = () => {
+  const { user } = useAuth();
   return (
     <section className="flex flex-col md:flex-row items-center max-w-7xl py-4 px-4 mx-auto justify-between ">
       <div className="md:w-1/2 space-y-6  ">
@@ -12,7 +14,7 @@ const Hero = () => {
           Analyze, compare, and project your property investments in Bengaluru
           with confidence.
         </p>
-        <Link to="/signup">
+        <Link to={user ? "/dashboard" : "/signup"}>
           <button className="px-6 py-3 bg-blue-600 text-white rounded-lg">
             Get Started
           </button>
